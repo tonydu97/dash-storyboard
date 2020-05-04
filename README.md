@@ -1,2 +1,2 @@
-# python-diagnostics-dashboard
-M&A Diagnostics dashboard using Dash and Plotly 
+# dash-storyboard
+Storyboard Format for Dash Web App
