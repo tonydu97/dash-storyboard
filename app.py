@@ -39,11 +39,8 @@ import plotly.express as px
 
 
 # global vars
-dir_absolute = 'C:/Users/tdu/python/python-diagnostics-dashboard/diagnostics/'
 dirname = os.path.dirname(__file__)
-path_d = os.path.join(dirname, 'diagnostics/')
-#lst_rel = [f for f in os.listdir(relative_path) if f.endswith('.xlsx')]
-#lst_rel = os.listdir(relative_path)
+#path_d = os.path.join(dirname, 'diagnostics/')
 lst_baa = ['FG', 'DUK', 'ALGAMS']
 lst_periods = ['S_SP1', 'S_SP2', 'S_P', 'S_OP', 'W_SP', 'W_P', 'W_OP', 'H_SP', 'H_P', 'H_OP']
 
@@ -61,7 +58,7 @@ NAVBAR = dbc.Navbar(
             # Use row and col to control vertical alignment of logo / brand
             dbc.Row(
                 [
-                    dbc.Col(html.Img(src=app.get_asset_url('cra-logo.png'), height='30px')),
+                    dbc.Col(html.Img(src=app.get_asset_url('branding.png'), height='40px')),
                     dbc.Col(
                         dbc.NavbarBrand('Dash Storyboard', className='ml-2')
                     ),
@@ -71,122 +68,64 @@ NAVBAR = dbc.Navbar(
             ),
         )
     ],
-    color='light',
-    #dark=True,
+    color='primary',
+    dark=True,
     sticky='top',
 )
 
-LEFT_COLUMN = dbc.Jumbotron(
+
+
+STORYBOARD_NAV = dbc.CardDeck(
     [
-        dcc.Loading(
-            id = 'loading-inputs',
-            children = [
-                html.Div(id='store-df', style={'display' : 'none'}),
-                dbc.Container(
-                    [
-                        html.H4(children='Inputs', className='display-5', style = {'fontSize': 36}),
-                        html.Hr(className='my-2'),
-                        html.Label('Select diagnostics file', className='lead'),
-                        dcc.Dropdown(
-                            id='file-drop', clearable=False, style = {'marginBottom': 10, 'fontSize': 14},
-                            #options=[{'label':i, 'value':i} for i in os.listdir(dir_diagnostics)]
-                            options=[{'label':i, 'value':i} for i in [f for f in os.listdir(path_d) if f.endswith('.xlsx')]]
-                        ),
-                        dbc.Button('Import', id = 'import-btn', color = 'primary', className = 'mr-1', n_clicks = 0, disabled = True),
-                        html.Div(style = {'marginBottom':25}),
-                        html.Label('Select BAA', className='lead'),
-                        dcc.Dropdown(
-                            id ='baa-drop', clearable = False, style={'marginBottom': 25}, disabled = True
-                        ),
-                        html.Label('Select Period', className='lead'),
-                        dcc.Dropdown(
-                            id ='period-drop', clearable = False, style={'marginBottom': 0}, disabled = True,
-                            options = [{'label':i, 'value':i} for i in lst_periods]
+        dbc.Card(
+            [
+                dbc.Button(
+                    children=[
+                        html.H5('Solar Installations have increased in the last 4 years', className='card-title'),
+                        html.P(
+                            'This card has some text content, which is a little '
+                            'bit longer than the second card.',
+                            className='card-text',
                         )
-                    ], fluid = True
+                    ], style={'height': '100%' }, color = 'primary'
                 )
             ]
-
-        )
-    ],fluid = True
-)
-
-
-MMSUMMARY_PLOT = [
-    dbc.CardHeader(html.H5('Mmfile Summary')),
-    dbc.CardBody(
-        [
-            dbc.Row(
+        ),
+        dbc.Card(
+            dbc.CardBody(
                 [
-                    dbc.Col(
-                        [
-                            dcc.Tabs(
-                                id='top-tabs',
-                                children=[
-                                    dcc.Tab(
-                                        label='Generation',
-                                        children=[
-                                            dcc.Loading(
-                                                id='loading-gen',
-                                                children=[
-                                                    dbc.Row(
-                                                        children=[
-                                                            dbc.Col(html.P(children='Utilities to include'), md = 1),
-                                                            dbc.Col(
-                                                                dbc.InputGroup(
-                                                                    children=[
-                                                                        dbc.Input(id='gen-input', type='number', min='1', max='20', value=5),
-                                                                        dbc.InputGroupAddon(
-                                                                            dbc.Button(id='gen-submit-btn', children='Update', color='primary'),
-                                                                            addon_type='append'
-                                                                        )
-                                                                    ]
-                                                                ), md=2
-                                                            ),
-                                                        ]
-                                                    ),
-                                                    dbc.Row(
-                                                        dbc.Col(children=[dcc.Graph(id='gen-graph')], md=12)
-                                                    )
-                                                    #dcc.Graph(id='gen-graph')
-                                                ], 
-                                                type='default',
-                                            )
-                                        ],
-                                    ),
-                                    dcc.Tab(
-                                        label='Load',
-                                        children=[
-                                            dcc.Loading(
-                                                id='loading-load',
-                                                children=[dcc.Graph(id='load-graph')],
-                                                type='default',
-                                            )
-                                        ],
-                                    ),
-                                    dcc.Tab(
-                                        label='Transmission',
-                                        children=[
-                                            dcc.Loading(
-                                                id ='loading-transmission',
-                                                children = [dcc.Graph(id='tx-graph')],
-                                                type = 'default',
-                                            )
-                                        ],
-                                    ),
-                                ],
-                            )
-                        ],
-                        #md=12,
+                    html.H5('Penetration is largely focused in the midwest region', className='card-title'),
+                    html.P(
+                        'This card has some text content.',
+                        className='card-text',
+                    ),
+                    dbc.Button(
+                        'Click here', color='warning', className='mt-auto'
                     ),
                 ]
             )
-        ]
-    ),
-]
+        ),
+        dbc.Card(
+            dbc.CardBody(
+                [
+                    html.H5('Card 3', className='card-title'),
+                    html.P(
+                        'This card has some text content, which is longer '
+                        'than both of the other two cards, in order to '
+                        'demonstrate the equal height property of cards in a '
+                        'card group.',
+                        className='card-text',
+                    ),
+                    dbc.Button(
+                        'Click here', color='danger', className='mt-auto'
+                    ),
+                ]
+            )
+        ),
+    ]
+)
 
-
-BOTTOM_PLOTS = [
+STORYBOARD_CONTENT = [
     dbc.CardHeader(html.H5('Additional Diagnostics')),
     dbc.CardBody(
         [
@@ -288,14 +227,13 @@ BODY = dbc.Container(
     [
         dbc.Row(
             [
-                dbc.Col(LEFT_COLUMN, md=3, align='center'),
-                dbc.Col(dbc.Card(MMSUMMARY_PLOT), md=9),
+                dbc.Col(dbc.Card(STORYBOARD_NAV)),
             ],
             style={'marginTop': 30},
         ),
         dbc.Row(
             [
-                dbc.Col(dbc.Card(BOTTOM_PLOTS))
+                dbc.Col(dbc.Card(STORYBOARD_CONTENT))
             ],
             style={'marginTop': 30},
         ),
