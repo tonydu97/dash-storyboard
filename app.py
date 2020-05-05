@@ -68,9 +68,9 @@ NAVBAR = dbc.Navbar(
             ),
         )
     ],
-    color='primary',
+    color='dark',
     dark=True,
-    sticky='top',
+    #sticky='top',
 )
 
 
@@ -92,39 +92,63 @@ STORYBOARD_NAV = dbc.CardDeck(
             ]
         ),
         dbc.Card(
-            dbc.CardBody(
-                [
-                    html.H5('Penetration is largely focused in the midwest region', className='card-title'),
-                    html.P(
-                        'This card has some text content.',
-                        className='card-text',
-                    ),
-                    dbc.Button(
-                        'Click here', color='warning', className='mt-auto'
-                    ),
-                ]
-            )
+            [
+                dbc.Button(
+                    children=[
+                        html.H5('Solar Installations have increased in the last 4 years', className='card-title'),
+                        html.P(
+                            'This card has some text content, which is a little '
+                            'bit longer than the second card.',
+                            className='card-text',
+                        )
+                    ], style={'height': '100%' }, color = 'light'
+                )
+            ]
         ),
         dbc.Card(
-            dbc.CardBody(
-                [
-                    html.H5('Card 3', className='card-title'),
-                    html.P(
-                        'This card has some text content, which is longer '
-                        'than both of the other two cards, in order to '
-                        'demonstrate the equal height property of cards in a '
-                        'card group.',
-                        className='card-text',
-                    ),
-                    dbc.Button(
-                        'Click here', color='danger', className='mt-auto'
-                    ),
-                ]
-            )
+            [
+                dbc.Button(
+                    children=[
+                        html.H5('Solar Installations have increased in the last 4 years', className='card-title'),
+                        html.P(
+                            'This card has some text content, which is a little '
+                            'bit longer than the second card.',
+                            className='card-text',
+                        )
+                    ], style={'height': '100%' }, color = 'light'
+                )
+            ]
+        ),
+        dbc.Card(
+            [
+                dbc.Button(
+                    children=[
+                        html.H5('Solar Installations have increased in the last 4 years', className='card-title'),
+                        html.P(
+                            'This card has some text content, which is a little '
+                            'bit longer than the second card.',
+                            className='card-text',
+                        )
+                    ], style={'height': '100%' }, color = 'light'
+                )
+            ]
+        ),
+        dbc.Card(
+            [
+                dbc.Button(
+                    children=[
+                        html.H5('Solar Installations have increased in the last 4 years', className='card-title'),
+                        html.P(
+                            'This card has some text content, which is a little '
+                            'bit longer than the second card.',
+                            className='card-text',
+                        )
+                    ], style={'height': '100%' }, color = 'light'
+                )
+            ]
         ),
     ]
 )
-
 STORYBOARD_CONTENT = [
     dbc.CardHeader(html.H5('Additional Diagnostics')),
     dbc.CardBody(
@@ -242,7 +266,7 @@ BODY = dbc.Container(
 )
 
 
-app.title = 'Diagnostics Dashboard'
+app.title = 'Storyboard'
 app.layout = html.Div(children=[NAVBAR, BODY])
 if __name__ == '__main__':
     app.run_server(host='127.0.0.1', port='8050', debug=True)
